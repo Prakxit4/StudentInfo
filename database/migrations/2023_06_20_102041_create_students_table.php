@@ -9,16 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('class_id');
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->unsignedBigInteger('student_class_id');
+            $table->foreign('student_class_id')->references('id')->on('student_classes');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
