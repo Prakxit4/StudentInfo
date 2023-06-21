@@ -50,8 +50,7 @@ class StudentClassController extends Controller
    {
            $studentClass->delete();
            
-       return redirect()->route('student_classes.index')
-           ->with('success', 'Student class deleted successfully.');
+        return redirect()->route('student_classes.index')
+        ->with('success', 'Student class deleted successfully.');
    }
-   
 }
