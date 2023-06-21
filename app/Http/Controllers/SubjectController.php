@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\StudentClass;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -61,4 +59,3 @@ class SubjectController extends Controller
             ->with('success', 'Subject deleted successfully.');
     }
 }
-

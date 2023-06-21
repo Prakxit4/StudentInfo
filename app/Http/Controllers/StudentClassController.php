@@ -15,15 +15,16 @@ class StudentClassController extends Controller
 
     public function create()
     {
-        return view('student_classes.create');
+        $studentClasses = StudentClass::all();
+        return view('student_classes.create', ['studentClasses' => $studentClasses]);
     }
+    
 
     public function store(Request $request)
     {
         $request->validate([
             'class' => 'required',
         ]);
-
         StudentClass::create($request->only('class'));
 
         return redirect()->route('student_classes.index')->with('success', 'Student class created successfully');
@@ -45,10 +46,12 @@ class StudentClassController extends Controller
         return redirect()->route('student_classes.index')->with('success', 'Student class updated successfully');
     }
 
-    public function destroy(StudentClass $studentClass)
-    {
-        $studentClass->delete();
-
-        return redirect()->route('student_classes.index')->with('success', 'Student class deleted successfully');
-    }
+   public function destroy(StudentClass $studentClass)
+   {
+           $studentClass->delete();
+           
+       return redirect()->route('student_classes.index')
+           ->with('success', 'Student class deleted successfully.');
+   }
+   
 }

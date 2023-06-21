@@ -23,7 +23,7 @@
             <tr>
                 <td>{{ $subject->id }}</td>
                 <td>{{ $subject->student->name }}</td>
-                <td>{{ $subject->subject }}</td>
+                <td>{{ $subject->name }}</td>
                 <td>
                     <a href="{{ route('subjects.edit', $subject) }}" class="btn btn-primary">Edit</a>
                     <form action="{{ route('subjects.destroy', $subject) }}" method="POST" class="d-inline">

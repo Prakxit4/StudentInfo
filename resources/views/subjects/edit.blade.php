@@ -23,8 +23,8 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="subject">Subject:</label>
-        <input type="text" name="subject" id="subject" class="form-control" value="{{ $subject->subject }}">
+        <label for="subject">Subject Name:</label>
+        <input type="text" name="name" id="name" class="form-control" value="{{ $subject->name }}">
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>

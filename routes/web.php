@@ -6,12 +6,12 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 
 // StudentClass routes
-Route::get('/class', [StudentClassController::class, 'index'])->name('student_classes.index');
-Route::get('/class/create', [StudentClassController::class, 'create'])->name('student_classes.create');
-Route::post('/class', [StudentClassController::class, 'store'])->name('student_classes.store');
-Route::get('/class/{student_class}/edit', [StudentClassController::class, 'edit'])->name('student_classes.edit');
-Route::put('/class/{student_class}', [StudentClassController::class, 'update'])->name('student_classes.update');
-Route::delete('class/{student_class}', [StudentClassController::class, 'destroy'])->name('student_classes.destroy');
+Route::get('/classes', [StudentClassController::class, 'index'])->name('student_classes.index');
+Route::get('/classes/create', [StudentClassController::class, 'create'])->name('student_classes.create');
+Route::post('/classes', [StudentClassController::class, 'store'])->name('student_classes.store');
+Route::get('/classes/{student_class}/edit', [StudentClassController::class, 'edit'])->name('student_classes.edit');
+Route::put('/classes/{student_class}', [StudentClassController::class, 'update'])->name('student_classes.update');
+Route::delete('/classes/{student_class}', [StudentClassController::class, 'destroy'])->name('student_classes.destroy');
 
 // Student routes
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');

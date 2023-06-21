@@ -14,7 +14,7 @@
 <form action="{{ route('subjects.store') }}" method="POST">
     @csrf
     <div class="form-group">
-        <label for="student_id">Student:</label>
+        <label for="student_id">Student Name:</label>
         <select name="student_id" id="student_id" class="form-control">
             @foreach ($students as $student)
                 <option value="{{ $student->id }}">{{ $student->name }}</option>
@@ -22,8 +22,8 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="subject">Subject:</label>
-        <input type="text" name="subject" id="subject" class="form-control">
+        <label for="name">Subject Name:</label>
+        <input type="text" name="name" id="name" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
