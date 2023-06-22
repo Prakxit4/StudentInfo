@@ -25,7 +25,12 @@ class StudentController extends Controller
             'name' => 'required',
             'student_class_id' => 'required',
         ]);
-
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Please fill out all required fields.');
+        }
         Student::create($request->all());
 
         return redirect()->route('students.index')

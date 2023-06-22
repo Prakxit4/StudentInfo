@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentClassController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\SearchController;
 
 // StudentClass routes
 Route::get('/classes', [StudentClassController::class, 'index'])->name('student_classes.index');
@@ -28,3 +29,4 @@ Route::post('/subjects', [SubjectController::class, 'store'])->name('subjects.st
 Route::get('/subjects/{subject}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');
 Route::put('/subjects/{subject}', [SubjectController::class, 'update'])->name('subjects.update');
 Route::delete('/subjects/{subject}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
