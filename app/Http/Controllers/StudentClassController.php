@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class StudentClassController extends Controller
 {
@@ -22,11 +24,19 @@ class StudentClassController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'class' => 'required',
         ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Please fill out all required fields.');
+        }
+    
         StudentClass::create($request->only('class'));
-
+    
         return redirect()->route('student_classes.index')->with('success', 'Student class created successfully');
     }
 
@@ -46,12 +56,23 @@ class StudentClassController extends Controller
         return redirect()->route('student_classes.index')->with('success', 'Student class updated successfully');
     }
 
-   public function destroy(StudentClass $studentClass)
-   {
-           $studentClass->delete();
-           
-       return redirect()->route('student_classes.index')
-           ->with('success', 'Student class deleted successfully.');
-   }
+    public function destroy(StudentClass $studentClass)
+    {
+        try {
+            $studentClass->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() === '23000') {
+                return redirect()->route('student_classes.index')
+                    ->with('error', 'Cannot delete the student class because it is associated with students.');
+            }
+            
+            // Handle other query exceptions if needed
+            // return a relevant error message or redirect as per your requirements
+        }
+        
+        return redirect()->route('student_classes.index')
+            ->with('success', 'Student class deleted successfully.');
+    }
+    
 
 }

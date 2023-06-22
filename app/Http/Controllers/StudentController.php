@@ -53,8 +53,18 @@ class StudentController extends Controller
 
     public function destroy(Student $student)
     {
-        $student->delete();
-
+        try {
+            $student->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() === '23000') {
+                return redirect()->route('students.index')
+                    ->with('error', 'Cannot delete the student because it is associated with subjects.');
+            }
+    
+            // Handle other query exceptions if needed
+            // return a relevant error message or redirect as per your requirements
+        }
+    
         return redirect()->route('students.index')
             ->with('success', 'Student deleted successfully.');
     }
