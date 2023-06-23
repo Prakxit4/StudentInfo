@@ -8,7 +8,9 @@ use App\Http\Controllers\StudentSearchController;
 use App\Http\Controllers\StudentClassSearchController;
 use App\Http\Controllers\SubjectSearchController;
 
+
 // StudentClass routes
+Route::get('/', [StudentClassController::class, 'index'])->name('student_classes.index');
 Route::get('/classes', [StudentClassController::class, 'index'])->name('student_classes.index');
 Route::get('/classes/create', [StudentClassController::class, 'create'])->name('student_classes.create');
 Route::post('/classes', [StudentClassController::class, 'store'])->name('student_classes.store');

@@ -17,6 +17,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Class</th>
                         <th>Actions</th>
                         <!-- Add additional student table columns here -->
                     </tr>
@@ -26,6 +27,7 @@
                         <tr>
                             <td>{{ $student->id }}</td>
                             <td>{{ $student->name }}</td>
+                            <td>{{ $student->studentClass->class }}</td>
                             <td>
                                 <a href="{{ route('students.edit', $student) }}" class="btn btn-primary">Edit</a>
                                 <form action="{{ route('students.destroy', $student) }}" method="POST" class="d-inline">

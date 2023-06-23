@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
@@ -27,12 +28,7 @@ class StudentController extends Controller
             'name' => 'required',
             'student_class_id' => 'required',
         ]);
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput()
-                ->with('error', 'Please fill out all required fields.');
-        }
+    
         Student::create($request->all());
 
         return redirect()->route('students.index')
