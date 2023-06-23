@@ -12,8 +12,10 @@ class StudentClassController extends Controller
     public function index()
     {
         $studentClasses = StudentClass::all();
-        return view('student_classes.index', compact('studentClasses'));
+        $context = 'studentClass';
+        return view('student_classes.index', compact('studentClasses', 'context'));
     }
+    
 
     public function create()
     {

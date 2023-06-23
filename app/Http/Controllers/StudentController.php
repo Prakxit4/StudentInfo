@@ -10,9 +10,11 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return view('students.index', compact('students'));
+        $context = 'student';
+        return view('students.index', compact('students', 'context'));
     }
 
+    
     public function create()
     {
         $studentClasses = StudentClass::all();
