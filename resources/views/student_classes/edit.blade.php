@@ -3,8 +3,6 @@
 </head>
 <body>
 
-
-
     <div class="container mt-5">
         <h1 class="display-4">Edit Student Class</h1>
         @if ($errors->any())

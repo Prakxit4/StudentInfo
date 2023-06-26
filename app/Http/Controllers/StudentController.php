@@ -25,7 +25,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|regex:/^[A-Za-z\s]+$/',
             'student_class_id' => 'required',
         ]);
     
@@ -44,7 +44,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|regex:/^[A-Za-z\s]+$/',
             'student_class_id' => 'required',
         ]);
 

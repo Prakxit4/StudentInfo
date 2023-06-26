@@ -6,7 +6,6 @@ use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 class StudentClassController extends Controller
 {
     public function index()
@@ -16,18 +15,18 @@ class StudentClassController extends Controller
         return view('student_classes.index', compact('studentClasses', 'context'));
     }
     
-
     public function create()
     {
         $studentClasses = StudentClass::all();
         return view('student_classes.create', ['studentClasses' => $studentClasses]);
     }
     
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'class' => 'required',
+            'class' => 'required|numeric',
+        ], [
+            'class.numeric' => 'The :attribute field should contain only numbers.',
         ]);
     
         if ($validator->fails()) {
@@ -50,7 +49,9 @@ class StudentClassController extends Controller
     public function update(Request $request, StudentClass $studentClass)
     {
         $request->validate([
-            'class' => 'required',
+            'class' => 'required|numeric',
+        ], [
+            'class.numeric' => 'The :attribute field should contain only numbers.',
         ]);
 
         $studentClass->update($request->only('class'));
@@ -75,6 +76,4 @@ class StudentClassController extends Controller
         return redirect()->route('student_classes.index')
             ->with('success', 'Student class deleted successfully.');
     }
-    
-
 }
