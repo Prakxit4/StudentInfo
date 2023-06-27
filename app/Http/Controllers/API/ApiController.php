@@ -70,13 +70,14 @@ class ApiController extends Controller
     public function destroy($id)
     {
         $studentClass = StudentClass::find($id);
-
+    
         if (!$studentClass) {
             return response()->json(['error' => 'Resource not found'], Response::HTTP_NOT_FOUND);
         }
-
+    
         $studentClass->delete();
-
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+    
+        return response()->json(['message' => 'Deleted ID: ' . $id], Response::HTTP_OK);
     }
+    
 }
