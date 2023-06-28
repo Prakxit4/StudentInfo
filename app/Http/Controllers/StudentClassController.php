@@ -24,9 +24,9 @@ class StudentClassController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'class' => 'required|numeric',
+            'class' => 'required|alpha',
         ], [
-            'class.numeric' => 'The :attribute field should contain only numbers.',
+            'class.numeric' => 'The :attribute field should contain only aphabets.',
         ]);
     
         if ($validator->fails()) {
@@ -49,9 +49,9 @@ class StudentClassController extends Controller
     public function update(Request $request, StudentClass $studentClass)
     {
         $request->validate([
-            'class' => 'required|numeric',
+            'class' => 'required|alpha',
         ], [
-            'class.numeric' => 'The :attribute field should contain only numbers.',
+            'class.numeric' => 'The :attribute field should contain only letters.',
         ]);
 
         $studentClass->update($request->only('class'));

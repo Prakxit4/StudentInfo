@@ -16,7 +16,6 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Student Name</th>
                         <th>Subject</th>
                         <th>Actions</th>
                     </tr>
@@ -25,7 +24,6 @@
                     @foreach ($results['subjects'] as $subject)
                         <tr>
                             <td>{{ $subject->id }}</td>
-                            <td>{{ $subject->student->name }}</td>
                             <td>{{ $subject->name }}</td>
                             <td>
                                 <a href="{{ route('subjects.edit', $subject) }}" class="btn btn-primary">Edit</a>

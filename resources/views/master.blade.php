@@ -23,6 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('subjects.index') }}">Subjects</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('ss.index') }}">Students with Subjects</a>
+                </li>
             </ul>
         </div>
         @include('search')

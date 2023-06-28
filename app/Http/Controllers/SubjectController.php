@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,20 +15,20 @@ class SubjectController extends Controller
         return view('subjects.index', compact('subjects', 'context'));
     }
 
-
-
     public function create()
     {
-        $students = Student::all();
-        return view('subjects.create', compact('students'));
+        return view('subjects.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|regex:/^[A-Za-z\s]+$/',
-            'student_id' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         Subject::create($request->all());
 
@@ -38,16 +38,18 @@ class SubjectController extends Controller
 
     public function edit(Subject $subject)
     {
-        $students = Student::all();
-        return view('subjects.edit', compact('subject', 'students'));
+        return view('subjects.edit', compact('subject'));
     }
 
     public function update(Request $request, Subject $subject)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|regex:/^[A-Za-z\s]+$/',
-            'student_id' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $subject->update($request->all());
 
