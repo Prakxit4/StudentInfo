@@ -12,9 +12,9 @@ class SubjectStudentController extends Controller
 {
     public function index()
     {
-        $subjectStudents = SubjectStudent::all();
+        $subjectStudents = SubjectStudent::with('student', 'subject')->get();
         $context = 'subjectstudent';
-        return view('SubjectStudent.index', compact('subjectStudents','context'));
+        return view('SubjectStudent.index', compact('subjectStudents', 'context'));
     }
 
     public function create()
@@ -36,6 +36,7 @@ class SubjectStudentController extends Controller
         return redirect()->route('ss.index')
             ->with('success', 'Subject-Student relationship created successfully.');
     }
+    
     public function edit(SubjectStudent $subjectStudent)
     {
         $subjects = Subject::all();
@@ -46,13 +47,13 @@ class SubjectStudentController extends Controller
     public function update(Request $request, SubjectStudent $subjectStudent)
     {
         $request->validate([
-            'subject_id' => 'required|exists:subjects,id',
-            'student_id' => 'required|exists:students,id',
+            'subject_id' => 'required',
+            'student_id' => 'required',
         ]);
     
         $subjectStudent->update($request->all());
     
-        return redirect()->route('SubjectStudent.index')
+        return redirect()->route('ss.index')
             ->with('success', 'Subject-Student relationship updated successfully.');
     }
     
