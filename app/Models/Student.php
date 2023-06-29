@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\SubjectStudent;
 
 class Student extends Model
 {
@@ -13,8 +14,8 @@ class Student extends Model
         return $this->belongsTo(StudentClass::class);
     }
 
-    public function subjects()
+    public function subject()
     {
-        return $this->hasMany(Subject::class);
+        return $this->hasOne(SubjectStudent::class);
     }
 }

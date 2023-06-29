@@ -35,14 +35,12 @@ Route::get('/subjects/{subject}/edit', [SubjectController::class, 'edit'])->name
 Route::put('/subjects/{subject}', [SubjectController::class, 'update'])->name('subjects.update');
 Route::delete('/subjects/{subject}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
 
-
 Route::get('/subjectstudents', [SubjectStudentController::class, 'index'])->name('ss.index');
 Route::get('/subjectstudents/create', [SubjectStudentController::class, 'create'])->name('ss.create');
 Route::post('/subjectstudents', [SubjectStudentController::class, 'store'])->name('ss.store');
 Route::get('/subjectstudents/{subjectStudent}/edit', [SubjectStudentController::class, 'edit'])->name('ss.edit');
 Route::put('/subjectstudents/{subjectStudent}', [SubjectStudentController::class, 'update'])->name('ss.update');
 Route::delete('/subjectstudents/{subjectStudent}', [SubjectStudentController::class, 'destroy'])->name('ss.destroy');
-
 
 // Search routes
 Route::get('/search/students', [StudentSearchController::class, 'search'])->name('students.search');

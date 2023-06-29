@@ -25,31 +25,40 @@
                 <tr>
                     <th>ID</th>
                     <th>Student Name</th>
-                    <th>Subject Name</th>
+                    <th>Subjects</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($subjectStudents as $subjectStudent)
-                    <tr>
-                        <td>{{ $subjectStudent->id }}</td>
-                        <td>{{ $subjectStudent->student->name }}</td>
-                        <td>{{ $subjectStudent->subject->name }}</td>
-                        <td>
-                            <a href="{{ route('ss.edit', $subjectStudent) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ route('ss.destroy', $subjectStudent) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
+            @foreach ($subjectstudents as $subjectstudent)
+    <tr>
+    <td>{{ $subjectstudent->student_id }}</td>
+        <td>{{ $subjectstudent->student_name }}</td>
+        <td>
+            @if ($subjectstudent->subjects)
+                {{ $subjectstudent->subjects}}
+            @else
+                No subjects assigned
+            @endif
+        </td>
+        <td>
+            <a href="{{ route('ss.edit', $subjectstudent->student_id) }}" class="btn btn-primary">Edit</a>
+            <form action="{{ route('ss.destroy', $subjectstudent->student_id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+
+
+        </td>
+    </tr>
+@endforeach
+
+           </tbody>
         </table>
     </div>
 @endsection
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
