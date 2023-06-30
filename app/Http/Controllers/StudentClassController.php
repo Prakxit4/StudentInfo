@@ -43,6 +43,7 @@ class StudentClassController extends Controller
 
     public function edit(StudentClass $studentClass)
     {
+        $studentClasses = StudentClass::all();
         return view('student_classes.edit', compact('studentClass'));
     }
 

@@ -5,8 +5,8 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Create SubjectStudent</h1>
-        @if ($errors->any())
+    <h1>Create Subject-Student Relationship</h1>
+    @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -14,30 +14,37 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
-
-        <form action="{{ route('ss.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="subject_id">Subject:</label>
-                <select name="subject_id" id="subject_id" class="form-control">
-                    @foreach ($subjects as $subject)
-                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="student_id">Student:</label>
-                <select name="student_id" id="student_id" class="form-control">
-                    @foreach ($students as $student)
-                        <option value="{{ $student->id }}">{{ $student->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-        </form>
-    </div>
-
+     @endif
+    <form action="{{ route('ss.store') }}" method="POST">
+        @csrf
+        
+        <div class="form-group">
+            <label for="student_id">Student:</label>
+            <select name="student_id" id="student_id" class="form-control">
+                @foreach ($students as $student)
+                    <option value="{{ $student->id }}">{{ $student->name }}</option>
+                @endforeach
+            </select>
+            @error('student_id')
+                <span class="error">{{ $message }}</span>
+            @enderror
+        </div>
+        
+        <div class="form-group">
+            <label for="subject_id">Subject:</label>
+            <select name="subject_id" id="subject_id" class="form-control">
+                @foreach ($subjects as $subject)
+                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                @endforeach
+            </select>
+            @error('subject_id')
+                <span class="error">{{ $message }}</span>
+            @enderror
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@ class SubjectStudent extends Model
     protected $table = 'subject_student';
 
     protected $fillable = [
+        'id',
         'subject_id',
         'student_id',
     ];

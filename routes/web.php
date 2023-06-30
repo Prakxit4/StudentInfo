@@ -8,6 +8,7 @@ use App\Http\Controllers\StudentSearchController;
 use App\Http\Controllers\StudentClassSearchController;
 use App\Http\Controllers\SubjectSearchController;
 use App\Http\Controllers\SubjectStudentController;
+use App\Http\Controllers\SubjectStudentSearchController;
 
 
 // StudentClass routes
@@ -35,14 +36,17 @@ Route::get('/subjects/{subject}/edit', [SubjectController::class, 'edit'])->name
 Route::put('/subjects/{subject}', [SubjectController::class, 'update'])->name('subjects.update');
 Route::delete('/subjects/{subject}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
 
-Route::get('/subjectstudents', [SubjectStudentController::class, 'index'])->name('ss.index');
-Route::get('/subjectstudents/create', [SubjectStudentController::class, 'create'])->name('ss.create');
-Route::post('/subjectstudents', [SubjectStudentController::class, 'store'])->name('ss.store');
-Route::get('/subjectstudents/{subjectStudent}/edit', [SubjectStudentController::class, 'edit'])->name('ss.edit');
-Route::put('/subjectstudents/{subjectStudent}', [SubjectStudentController::class, 'update'])->name('ss.update');
-Route::delete('/subjectstudents/{subjectStudent}', [SubjectStudentController::class, 'destroy'])->name('ss.destroy');
+Route::prefix('ss')->group(function () {
+    Route::get('/', [SubjectStudentController::class, 'index'])->name('ss.index');
+    Route::get('/create', [SubjectStudentController::class, 'create'])->name('ss.create');
+    Route::post('/', [SubjectStudentController::class, 'store'])->name('ss.store');
+    Route::get('/{subjectStudent}/edit', [SubjectStudentController::class, 'edit'])->name('ss.edit');
+    Route::put('/{subjectStudent}', [SubjectStudentController::class, 'update'])->name('ss.update');
+    Route::delete('/{subjectStudent}', [SubjectStudentController::class, 'destroy'])->name('ss.destroy');
+});
 
 // Search routes
 Route::get('/search/students', [StudentSearchController::class, 'search'])->name('students.search');
 Route::get('/search/subjects', [SubjectSearchController::class, 'search'])->name('subjects.search');
 Route::get('/search/student-classes', [StudentClassSearchController::class, 'search'])->name('search.studentClasses');
+Route::get('/search/subjectstudent', [SubjectStudentSearchController::class, 'search'])->name('subjectstudent.search');

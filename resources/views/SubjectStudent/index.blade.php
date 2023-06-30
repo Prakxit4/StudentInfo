@@ -1,3 +1,4 @@
+<!-- resources/views/SubjectStudent/index.blade.php -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,57 +9,42 @@
 @extends('master')
 
 @section('title', 'Subject Students')
-
 @section('content')
     <div class="container mt-5">
-        <h1 class="display-4">Subject Students</h1>
-        @if (session('success'))
+    <h1 class="display-4">Subject-Student Relationships</h1>
+    @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
-        @endif
-
-        <a href="{{ route('ss.create') }}" class="btn btn-primary">Create Subject Student</a>
-
-        <table class="table table-striped">
-            <thead class="thead-dark">
+     @endif
+        <a href="{{ route('ss.create') }}" class="btn btn-primary">Create Subject-Student Relationship</a>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Student</th>
+                <th>Subjects</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($subjectStudents as $subjectStudent)
                 <tr>
-                    <th>ID</th>
-                    <th>Student Name</th>
-                    <th>Subjects</th>
-                    <th>Actions</th>
+                    <td>{{ $subjectStudent->student->name }}</td>
+                    <td>{{ $subjectStudent->subjects }}</td>
+                    <td>
+                        <a href="{{ route('ss.edit', $subjectStudent->id) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('ss.destroy', $subjectStudent->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-            @foreach ($subjectstudents as $subjectstudent)
-    <tr>
-    <td>{{ $subjectstudent->student_id }}</td>
-        <td>{{ $subjectstudent->student_name }}</td>
-        <td>
-            @if ($subjectstudent->subjects)
-                {{ $subjectstudent->subjects}}
-            @else
-                No subjects assigned
-            @endif
-        </td>
-        <td>
-            <a href="{{ route('ss.edit', $subjectstudent->student_id) }}" class="btn btn-primary">Edit</a>
-            <form action="{{ route('ss.destroy', $subjectstudent->student_id) }}" method="POST" class="d-inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-
-
-        </td>
-    </tr>
-@endforeach
-
-           </tbody>
-        </table>
-    </div>
+            @endforeach
+        </tbody>
+</table>
+</div>
 @endsection
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
