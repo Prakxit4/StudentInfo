@@ -25,7 +25,14 @@
     @foreach ($results['subjectStudents'] as $subjectStudent)
         <tr>
             <td>{{ $subjectStudent->student ? $subjectStudent->student->name : 'N/A' }}</td>
-            <td>{{ $subjectStudent->subjects }}</td>
+            <td>
+                @foreach ($subjectStudent->subject as $subject)
+                    {{ $subject->name }}
+                    @if (!$loop->last)
+                        ,
+                    @endif
+                @endforeach
+            </td>
             <td>
                 <a href="{{ route('ss.edit', $subjectStudent) }}" class="btn btn-primary">Edit</a>
                 <form action="{{ route('ss.destroy', $subjectStudent) }}" method="POST" class="d-inline">
@@ -38,6 +45,7 @@
         </tr>
     @endforeach
 </tbody>
+
 
             </table>
         @endif

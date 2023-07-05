@@ -14,7 +14,7 @@
         <button type="submit">Search</button>
     </form>
 @elseif($context === 'subjectstudent')
-    <form action="{{ route('subjects.search') }}" method="GET" class="search-form">
+    <form action="{{ route('subjectstudent.search') }}" method="GET" class="search-form">
         <input type="text" name="query" placeholder="Search subjects...">
         <button type="submit">Search</button>
     </form>
